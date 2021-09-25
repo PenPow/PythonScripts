@@ -1,18 +1,18 @@
 from utils import colors, console, strToInt
 
 def main():
-  temperature = strToInt(console.input(f'{colors.HEADER}Enter a Temperature in Fahrenheit:{colors.RESET} '))
+  temperature = strToInt(console.input(f'{colors.HEADER}Enter a Temperature in Celcius:{colors.RESET} '))
 
   if temperature == None:
     console.log(f'{colors.FAIL}Invalid{colors.RESET} Temperature - Please only Input Numbers')
     main()
   
-  console.log(f'Converted Temperature is {colors.OKGREEN}{(temperature - 32) * (5 / 9)}{colors.RESET}*C')
+  console.log(f'Converted Temperature is {colors.OKGREEN}{(temperature * (9 / 5)) + 32}{colors.RESET}*F')
 
   main()
 
 def start():
-  with open("assets/fahrenheitToCelciusWelcome.txt", "r") as file:
+  with open("assets/celciusToFahrenheitWelcome.txt", "r") as file:
     console.log(colors.HEADER + file.read() + f'\n{colors.RESET}')
     file.close()
 

@@ -2,23 +2,7 @@ from nltk.corpus import words
 import nltk
 import sys
 
-from replit import db
-
-class console:
-    def log(message):
-        print(message)
-    def input(message):
-        return input(message)
-
-def getDatabase(key):
-    try:
-        return db[key]
-    except KeyError:
-        return False
-
-def setDatabase(key, value):
-    db[key] = value
-    return True
+from utils import colors, console, getDatabase, setDatabase
 
 def parseCommand(command):
     command = command.lower().replace('.', '')
@@ -46,17 +30,6 @@ def parseCommand(command):
         console.log(f'{colors.FAIL}Resetting{colors.RESET} high score')
     else:
         console.log(f'{colors.FAIL}Invalid{colors.RESET} Command')
-
-class colors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    RESET = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
 
 letterDict = {
     "A": 2,
