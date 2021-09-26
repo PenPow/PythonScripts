@@ -1,8 +1,8 @@
-import letterGame, passwordGenerator, stringManipulation, conditionalStatements, creditCardValidator, reverseIt, celciusToFahrenheit, fahrenheitToCelcius
+import letterGame, passwordGenerator, stringManipulation, conditionalStatements, creditCardValidator, reverseIt, celciusToFahrenheit, fahrenheitToCelcius, snakeEyes
 from utils import colors, console, strToInt
 
 def main():
-  inputGame = strToInt(input(f'{colors.HEADER}Please Select a Module to Load:{colors.RESET}\n{colors.OKBLUE}1){colors.RESET} Letter Game\n{colors.OKBLUE}2){colors.RESET} Password Generator\n{colors.OKBLUE}3){colors.RESET} String Manipulation\n{colors.OKBLUE}4){colors.RESET} Conditional Statements\n{colors.OKBLUE}5){colors.RESET} Credit Card Validator\n{colors.OKBLUE}6){colors.RESET} Reverse It!\n{colors.OKBLUE}7){colors.RESET} Celcius to Fahrenheit\n{colors.OKBLUE}8){colors.RESET} Fahrenheit to Celcius\n\n{colors.HEADER}Input:{colors.RESET} '))
+  inputGame = strToInt(input(f'{colors.HEADER}Please Select a Module to Load:{colors.RESET}\n{colors.OKBLUE}1){colors.RESET} Letter Game\n{colors.OKBLUE}2){colors.RESET} Password Generator\n{colors.OKBLUE}3){colors.RESET} String Manipulation\n{colors.OKBLUE}4){colors.RESET} Conditional Statements\n{colors.OKBLUE}5){colors.RESET} Credit Card Validator\n{colors.OKBLUE}6){colors.RESET} Reverse It!\n{colors.OKBLUE}7){colors.RESET} Celcius to Fahrenheit\n{colors.OKBLUE}8){colors.RESET} Fahrenheit to Celcius\n{colors.OKBLUE}9){colors.RESET} Snake Eyes\n\n{colors.HEADER}Input:{colors.RESET} '))
 
   if inputGame == 1:
     console.log('Loading Letter Game!\n')
@@ -28,6 +28,9 @@ def main():
   elif inputGame == 8:
     console.log('Loading Fahrenheit to Celcius!\n')
     fahrenheitToCelcius.start()
+  elif inputGame == 9:
+    console.log('Loading Snake Eyes!\n')
+    snakeEyes.start()
   else:
     console.log('Invalid Option!\n')
     main()

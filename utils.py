@@ -3,6 +3,8 @@ try:
 except ModuleNotFoundError:
     pass
 
+import os
+
 class colors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -21,6 +23,8 @@ class console:
     def input(message):
         return input(message)
 
+def clear():
+    os.system('cls' if os.name=='nt' else 'clear')
 
 def getDatabase(key):
     try:
