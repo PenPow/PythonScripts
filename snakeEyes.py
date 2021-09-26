@@ -11,7 +11,7 @@ def turn(total, playerNo):
 
   for value in playerDice:
     if value == 1:
-      console.log(f'\n{color}Player {playerNo}{colors.RESET} rolled a {colors.FAIL}1 {colors.RESET}({playerDice[0]},{playerDice[1]})')
+      console.log(f'\n{color}Player {playerNo}{colors.RESET} rolled a {colors.FAIL}1 {colors.RESET}({playerDice[0]}, {playerDice[1]})')
       return 0
     total = total + value
 
@@ -29,6 +29,7 @@ def loop(playerOneBank, playerTwoBank, roundNo):
 
   playerTwoBank = playerTwoBank + turn(0, 2);
 
+  console.log(f'\n{colors.OKCYAN}Player 1 Bank: {colors.RESET}{playerOneBank}')
   console.log(f'{colors.OKBLUE}Player 2 Bank: {colors.RESET}{playerTwoBank}\n')
 
   console.input(f'Press {colors.OKGREEN}Enter{colors.RESET} to Move to the Next Round ')
