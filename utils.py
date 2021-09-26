@@ -36,6 +36,10 @@ def setDatabase(key, value):
     db[key] = value
     return True
 
+def clearDatabase():
+  for key in db.keys():
+    del db[key]
+
 def strToInt(inputMessage):
   try:
     return int(inputMessage)

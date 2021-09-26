@@ -1,4 +1,4 @@
-from utils import colors, console, clear
+from utils import colors, console, clear, setDatabase, getDatabase
 from random import randrange
 
 def turn(total, playerNo):
@@ -25,7 +25,7 @@ def turn(total, playerNo):
 def loop(playerOneBank, playerTwoBank, roundNo):
   playerOneBank = playerOneBank + turn(0, 1);
 
-  console.log(f'{colors.OKCYAN}Player 1 Bank: {colors.RESET}{playerOneBank}\n')
+  console.log(f'{colors.OKCYAN}Player 1 Bank: {colors.RESET}{playerOneBank}')
 
   playerTwoBank = playerTwoBank + turn(0, 2);
 
@@ -34,8 +34,11 @@ def loop(playerOneBank, playerTwoBank, roundNo):
 
   console.input(f'Press {colors.OKGREEN}Enter{colors.RESET} to Move to the Next Round ')
 
+  clear()
+  showSplashScreen()
+
   if playerOneBank > 100 or playerTwoBank > 100:
-    handleWinCondition(playerOneBank, playerTwoBank)
+    handleWinCondition(playerOneBank, playerTwoBank, roundNo)
   else:
     loop(playerOneBank, playerTwoBank, roundNo + 1)
 
@@ -45,6 +48,19 @@ def promptAgain():
   return False;
 
 def handleWinCondition(playerOneBank, playerTwoBank, roundNo):
+  highScore = getDatabase('highScoreSnakeEyes')
+  lowestRound = getDatabase('lowestRound') or 100
+
+  if playerOneBank > highScore or playerTwoBank > highScore:
+    console.log(f'{colors.OKGREEN}New High Score{colors.RESET} of {playerOneBank if playerOneBank > playerTwoBank else playerTwoBank}!')
+
+    setDatabase('highScoreSnakeEyes', playerOneBank if playerOneBank > playerTwoBank else playerTwoBank)
+  
+  if roundNo < lowestRound:
+    console.log(f'{colors.OKGREEN}Shortest Game Yet!{colors.RESET} with {roundNo} rounds!')
+
+    setDatabase('lowestRound', roundNo)
+  
   if playerOneBank > playerTwoBank:
     console.log(f'{colors.OKCYAN}Player One{colors.RESET} is the Winner: {playerOneBank} points')
   elif playerTwoBank > playerOneBank:
@@ -57,14 +73,25 @@ def handleWinCondition(playerOneBank, playerTwoBank, roundNo):
     start()
 
 def main():
-  loop(0, 0, 0)
+  loop(0, 0, 1)
 
 def start():
+  showSplashScreen()
+  
+  highScore = getDatabase('highScoreSnakeEyes')
+  lowestRound = getDatabase('lowestRound')
+
+  if highScore and lowestRound:
+    console.log(
+      f'Your Highest Score is {colors.OKCYAN}{highScore}{colors.RESET}\nThe shortest game lasted {colors.OKCYAN}{lowestRound}{colors.RESET} rounds!'
+    )
+
+  main()
+
+def showSplashScreen():
   with open("assets/snakeEyesWelcome.txt", "r") as file:
     console.log(colors.HEADER + file.read() + f'\n{colors.RESET}')
     file.close()
-
-  main()
 
 if __name__ == '__main__':
     start()
