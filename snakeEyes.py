@@ -1,4 +1,4 @@
-from utils import colors, console, clear, setDatabase, getDatabase
+from utils import colors, console, clear, setDatabase, getDatabase, databaseEnabled
 from random import randrange
 
 def turn(total, playerNo):
@@ -48,18 +48,23 @@ def promptAgain():
   return False;
 
 def handleWinCondition(playerOneBank, playerTwoBank, roundNo):
-  highScore = getDatabase('highScoreSnakeEyes')
-  lowestRound = getDatabase('lowestRound') or 100
+  highScore = 0
+  lowestRound = 100
+  if databaseEnabled():
+    highScore = getDatabase('highScoreSnakeEyes')
+    lowestRound = getDatabase('lowestRound')
 
   if playerOneBank > highScore or playerTwoBank > highScore:
     console.log(f'{colors.OKGREEN}New High Score{colors.RESET} of {playerOneBank if playerOneBank > playerTwoBank else playerTwoBank}!')
 
-    setDatabase('highScoreSnakeEyes', playerOneBank if playerOneBank > playerTwoBank else playerTwoBank)
+    if databaseEnabled():
+      setDatabase('highScoreSnakeEyes', playerOneBank if playerOneBank > playerTwoBank else playerTwoBank)
   
   if roundNo < lowestRound:
     console.log(f'{colors.OKGREEN}Shortest Game Yet!{colors.RESET} with {roundNo} rounds!')
 
-    setDatabase('lowestRound', roundNo)
+    if databaseEnabled():
+      setDatabase('lowestRound', roundNo)
   
   if playerOneBank > playerTwoBank:
     console.log(f'{colors.OKCYAN}Player One{colors.RESET} is the Winner: {playerOneBank} points')
@@ -78,8 +83,12 @@ def main():
 def start():
   showSplashScreen()
   
-  highScore = getDatabase('highScoreSnakeEyes')
-  lowestRound = getDatabase('lowestRound')
+  highScore = None
+  lowestRound = None
+
+  if databaseEnabled():
+    highScore = getDatabase('highScoreSnakeEyes')
+    lowestRound = getDatabase('lowestRound')
 
   if highScore and lowestRound:
     console.log(

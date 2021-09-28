@@ -2,7 +2,7 @@ from nltk.corpus import words
 import nltk
 import sys
 
-from utils import colors, console, getDatabase, setDatabase
+from utils import colors, console, getDatabase, setDatabase, databaseEnabled
 
 def parseCommand(command):
     command = command.lower().replace('.', '')
@@ -11,8 +11,11 @@ def parseCommand(command):
             f'{colors.RESET}Current {colors.WARNING}Commands{colors.RESET}: {colors.OKCYAN}.top{colors.RESET} | {colors.OKCYAN}.help{colors.RESET} | {colors.OKCYAN}.exit{colors.RESET} | {colors.OKCYAN}.reset{colors.RESET}'
         )
     elif command == 'top':
-        highScore = getDatabase('highScore')
-        word = getDatabase('highScoreWord')
+        word = None
+
+        if databaseEnabled():
+            highScore = getDatabase('highScore')
+            word = getDatabase('highScoreWord')
         if word:
             console.log(
                 f'Your Highest Score is {colors.OKCYAN}{highScore}{colors.RESET} with word \'{colors.OKGREEN}{word}{colors.RESET}\''
@@ -25,9 +28,12 @@ def parseCommand(command):
         console.log(f'{colors.OKGREEN}Exiting! Have a Nice Day')
         sys.exit(0)
     elif command == 'reset':
-        setDatabase('highScoreWord', '')
-        setDatabase('highScore', 0)
-        console.log(f'{colors.FAIL}Resetting{colors.RESET} high score')
+        if databaseEnabled():
+            setDatabase('highScoreWord', '')
+            setDatabase('highScore', 0)
+            console.log(f'{colors.FAIL}Resetting{colors.RESET} high score')
+        else:
+            console.log(f'Databases are {colors.FAIL}NOT{colors.RESET} available in this execution context')
     else:
         console.log(f'{colors.FAIL}Invalid{colors.RESET} Command')
 
@@ -82,7 +88,9 @@ def main():
         except:
             pass
 
-    highScore = getDatabase('highScore')
+    highScore = None
+    if databaseEnabled():
+        highScore = getDatabase('highScore')
 
     if not highScore:
         highScore = 0
@@ -92,8 +100,9 @@ def main():
             f'{colors.RESET}{colors.OKGREEN}Congratulations{colors.RESET}! Your word is your {colors.OKCYAN}highest{colors.RESET} yet, at {colors.OKCYAN}{total}{colors.RESET} points!'
         )
 
-        setDatabase('highScore', total)
-        setDatabase('highScoreWord', word)
+        if databaseEnabled():
+            setDatabase('highScore', total)
+            setDatabase('highScoreWord', word)
     else:
         console.log(
             f'{colors.RESET}Your word is worth {colors.OKCYAN}{total}{colors.RESET} points!'
@@ -107,8 +116,15 @@ def start():
     file.close()
 
   console.log(f'To see all {colors.WARNING}commands{colors.RESET}, type \'.help\'')
-  highScore = getDatabase('highScore')
-  word = getDatabase('highScoreWord')
+
+  highScore = None
+  word = None
+
+  if databaseEnabled():
+    highScore = getDatabase('highScore')
+    word = getDatabase('highScoreWord')
+  else:
+    console.log(f'Databases are {colors.FAIL}NOT{colors.RESET} available in this execution context!')
 
   if word:
     console.log(

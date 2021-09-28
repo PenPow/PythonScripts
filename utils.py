@@ -1,7 +1,9 @@
+isDatabaseEnabled = True
+
 try:
     from replit import db
 except ModuleNotFoundError:
-    pass
+    isDatabaseEnabled = False
 
 import os
 
@@ -45,3 +47,6 @@ def strToInt(inputMessage):
     return int(inputMessage)
   except:
     return None
+
+def databaseEnabled():
+    return isDatabaseEnabled
