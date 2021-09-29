@@ -42,9 +42,12 @@ def clearDatabase():
   for key in db.keys():
     del db[key]
 
-def strToInt(inputMessage):
+def strToInt(inputMessage, convert = False):
   try:
-    return int(inputMessage)
+    if convert:
+      return float(inputMessage)
+    else:
+      return int(inputMessage)
   except:
     return None
 
