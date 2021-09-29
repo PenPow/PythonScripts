@@ -1,8 +1,8 @@
-import letterGame, passwordGenerator, stringManipulation, conditionalStatements, creditCardValidator, reverseIt, celciusToFahrenheit, fahrenheitToCelcius, snakeEyes
+import letterGame, passwordGenerator, stringManipulation, conditionalStatements, creditCardValidator, reverseIt, celciusToFahrenheit, fahrenheitToCelcius, snakeEyes, arithmeticOperators
 from utils import colors, console, strToInt, clear, clearDatabase
 
 def main():
-  inputGame = strToInt(input(f'{colors.HEADER}Please Select a Module to Load:{colors.RESET}\n{colors.OKBLUE}1){colors.RESET} Letter Game\n{colors.OKBLUE}2){colors.RESET} Password Generator\n{colors.OKBLUE}3){colors.RESET} String Manipulation\n{colors.OKBLUE}4){colors.RESET} Conditional Statements\n{colors.OKBLUE}5){colors.RESET} Credit Card Validator\n{colors.OKBLUE}6){colors.RESET} Reverse It!\n{colors.OKBLUE}7){colors.RESET} Celcius to Fahrenheit\n{colors.OKBLUE}8){colors.RESET} Fahrenheit to Celcius\n{colors.OKBLUE}9){colors.RESET} Snake Eyes\n{colors.OKBLUE}10){colors.RESET} Reset Database\n\n{colors.HEADER}Input:{colors.RESET} '))
+  inputGame = strToInt(input(f'{colors.HEADER}Please Select a Module to Load:{colors.RESET}\n{colors.OKBLUE}1){colors.RESET} Letter Game\n{colors.OKBLUE}2){colors.RESET} Password Generator\n{colors.OKBLUE}3){colors.RESET} String Manipulation\n{colors.OKBLUE}4){colors.RESET} Conditional Statements\n{colors.OKBLUE}5){colors.RESET} Credit Card Validator\n{colors.OKBLUE}6){colors.RESET} Reverse It!\n{colors.OKBLUE}7){colors.RESET} Celcius to Fahrenheit\n{colors.OKBLUE}8){colors.RESET} Fahrenheit to Celcius\n{colors.OKBLUE}9){colors.RESET} Snake Eyes\n{colors.OKBLUE}10){colors.RESET} Reset Database\n{colors.OKBLUE}11){colors.RESET} Arithmetic Operators\n\n{colors.HEADER}Input:{colors.RESET} '))
 
   clear()
 
@@ -38,6 +38,9 @@ def main():
     clear()
     console.log(f'{colors.FAIL}Cleared{colors.RESET} Database!\n')
     main()
+  elif inputGame == 11:
+    console.log('Loading Maths Operators!\n')
+    arithmeticOperators.start()
   else:
     console.log('Invalid Option!\n')
     main()
