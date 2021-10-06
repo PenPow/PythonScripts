@@ -52,7 +52,7 @@ def handleWinCondition(playerOneBank, playerTwoBank, roundNo):
   lowestRound = 100
   if databaseEnabled():
     highScore = getDatabase('highScoreSnakeEyes')
-    lowestRound = getDatabase('lowestRound')
+    lowestRound = getDatabase('lowestRound') or 100
 
   if playerOneBank > highScore or playerTwoBank > highScore:
     console.log(f'{colors.OKGREEN}New High Score{colors.RESET} of {playerOneBank if playerOneBank > playerTwoBank else playerTwoBank}!')
@@ -89,7 +89,7 @@ def start():
   if databaseEnabled():
     highScore = getDatabase('highScoreSnakeEyes')
     lowestRound = getDatabase('lowestRound')
-
+  
   if highScore and lowestRound:
     console.log(
       f'Your Highest Score is {colors.OKCYAN}{highScore}{colors.RESET}\nThe shortest game lasted {colors.OKCYAN}{lowestRound}{colors.RESET} rounds!'

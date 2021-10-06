@@ -19,6 +19,9 @@ def main():
       diceRollString = diceRollString + f'{item}, '
     
     console.log(f'You rolled {total} ({diceRollString[0:len(diceRollString) - 2]})')
+  else:
+    console.log(f'{colors.FAIL}Invalid{colors.RESET} Number - Please only Input Numbers')
+    main()
 
 def start():
   with open("assets/arithmeticOperatorsWelcome.txt", "r") as file:
