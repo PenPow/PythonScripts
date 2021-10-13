@@ -2,7 +2,7 @@ from nltk.corpus import words
 import nltk
 import sys
 
-from utils import colors, console, getDatabase, setDatabase, databaseEnabled
+from utils import colors, console, getDatabase, setDatabase, databaseEnabled, clear
 
 def parseCommand(command):
     command = command.lower().replace('.', '')
@@ -107,7 +107,9 @@ def main():
         console.log(
             f'{colors.RESET}Your word is worth {colors.OKCYAN}{total}{colors.RESET} points!'
         )
-    main()
+    
+    clear()
+    start()
 
 def start():
   nltk.download('words')

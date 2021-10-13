@@ -49,7 +49,7 @@ def promptAgain():
 
 def handleWinCondition(playerOneBank, playerTwoBank, roundNo):
   highScore = 0
-  lowestRound = 100
+  lowestRound = 1000000
   if databaseEnabled():
     highScore = getDatabase('highScoreSnakeEyes')
     lowestRound = getDatabase('lowestRound') or 100

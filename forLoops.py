@@ -33,7 +33,7 @@ def main():
   console.log(f'\n{colors.HEADER}Squaring from 1 - 20?{colors.RESET} ')
 
   for i in range(1, 21):
-    console.log(f'{colors.RESET}Square of {i} is {colors.OKBLUE}{i ** i}')
+    console.log(f'{colors.RESET}Square of {i} is {colors.OKBLUE}{i ** 2}')
 
   console.log(f'\n{colors.HEADER}FizzBuzz{colors.RESET} ')
   for i in range(1, 101):
@@ -43,7 +43,7 @@ def main():
     if i % 5 == 0:
       string += 'Buzz'
     
-    console.log(f'{colors.RESET}Fizzbuzz of {i} is {colors.OKBLUE}{i if len(string) == 0 else string}')
+    console.log(f'{colors.RESET}Fizzbuzz[{i}] is {colors.OKBLUE}{i if string == "" else string}')
   
   main()
 
